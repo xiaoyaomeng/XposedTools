@@ -178,7 +178,7 @@ sub compile($$;$) {
     if ($sdk < 21) {
         push @targets, qw/libxposed_dalvik/;
     } else {
-        push @targets, qw/libxposed_art/;
+        push @targets, qw/libya/;
         push @targets, qw/libart libart-compiler libart-disassembler libsigchain/;
         push @targets, qw/dex2oat oatdump patchoat/;
         push @makefiles, qw(art/Android.mk);

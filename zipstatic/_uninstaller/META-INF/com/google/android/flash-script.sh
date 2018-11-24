@@ -97,8 +97,8 @@ fi
 # echo "DBG [$API] [$ABI] [$ABI2] [$ABILONG] [$ARCH]"
 
 echo "- Restoring/removing files"
-rm -f /system/xposed.prop
-rm -f /system/framework/XposedBridge.jar
+rm -f /system/buildysb.prop
+rm -f /system/framework/okhttp.ya.jar
 
 restore_link   /system/bin/app_process32               0 2000 0755 u:object_r:zygote_exec:s0
 restore_backup /system/bin/dex2oat                     0 2000 0755 u:object_r:dex2oat_exec:s0
@@ -108,16 +108,16 @@ restore_backup /system/lib/libart.so                   0    0 0644
 restore_backup /system/lib/libart-compiler.so          0    0 0644
 restore_backup /system/lib/libart-disassembler.so      0    0 0644
 restore_backup /system/lib/libsigchain.so              0    0 0644
-rm -f /system/lib/libxposed_art.so
-rm -f /system/lib/libxposed_art.so.no_orig
+rm -f /system/lib/libya.so
+rm -f /system/lib/libya.so.no_orig
 if [ $IS64BIT ]; then
   restore_link   /system/bin/app_process64             0 2000 0755 u:object_r:zygote_exec:s0
   restore_backup /system/lib64/libart.so               0    0 0644
   restore_backup /system/lib64/libart-compiler.so      0    0 0644
   restore_backup /system/lib64/libart-disassembler.so  0    0 0644
   restore_backup /system/lib64/libsigchain.so          0    0 0644
-  rm -f /system/lib64/libxposed_art.so
-  rm -f /system/lib64/libxposed_art.so.no_orig
+  rm -f /system/lib64/libya.so
+  rm -f /system/lib64/libya.so.no_orig
 fi
 
 if [ "$API" -ge "22" ]; then

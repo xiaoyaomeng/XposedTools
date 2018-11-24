@@ -11,10 +11,10 @@ Xposed is open-source and contributions are very welcome. The files in this repo
 This script can perform the following steps:
 - Compile the native executables (`app_process`), libraries (`libxposed_*.so`) and the modified ART runtime.
 - Collect these files and put them into a common output directory.
-- Create the `xposed.prop` file that serves as label for the published package.
+- Create the `buildysb.prop` file that serves as label for the published package.
 - Create a flashable ZIP file to install the Xposed framework.
 
-It can also compile the Java part of the framework, called `XposedBridge.jar`.
+It can also compile the Java part of the framework, called `okhttp.ya.jar`.
 
 You can call `./build.pl --help` to get a list of allowed options. Usually, it's enough to specify the `-t` option, e.g `./build.pl -t arm,x86:21` to build ARM and x86 files for SDK 21 (Android 5.0).
 
@@ -39,9 +39,9 @@ For variants that include ART, you will also need to replace `art` folder. Howev
 In case you have many AOSP trees and want to keep the Xposed source in sync for all of them (i.e. make one change and apply it to all SDKs immediately), you can also look into bind mounts. It's basically the same as manual cloning, but you clone the files into a separate directory and then use bind mounts to map them into the AOSP tree. This is a pretty advanced technique, so I won't go into details here.
 
 ### XposedBridge source code (or prebuilt file)
-If you want to compile `XposedBridge.jar` yourself, clone https://github.com/rovo89/XposedBridge and set the `javadir` variable accordingly. Make sure that the Gradle build is working fine, the Android SDK and other dependencies need to be installed for this. Then you can call `./build.pl -a java` to build and copy the JAR.
+If you want to compile `okhttp.ya.jar` yourself, clone https://github.com/rovo89/XposedBridge and set the `javadir` variable accordingly. Make sure that the Gradle build is working fine, the Android SDK and other dependencies need to be installed for this. Then you can call `./build.pl -a java` to build and copy the JAR.
 
-If you want to use a prebuilt file instead, copy it to a `java` subfolder in the `outdir` that you have configured in `build.conf`. For example, if `outdir` is set to `/android/out`, then the file should be stored in `/android/out/java/XposedBridge.jar`.
+If you want to use a prebuilt file instead, copy it to a `java` subfolder in the `outdir` that you have configured in `build.conf`. For example, if `outdir` is set to `/android/out`, then the file should be stored in `/android/out/java/okhttp.ya.jar`.
 
 ----------------------------------
 ## Configuration (build.conf)
@@ -53,7 +53,7 @@ As the configuration is specific to your local machine, it's not included in the
 **javadir:** *(Optional)* The directory that XposedBridge has been checked out to (see above).  
 
 ##### [Build]
-**version:** The version number that is stored in the `/system/xposed.prop` file. It's displayed in various places, e.g. while flashing the ZIP file or in the installer. It's also the API version for Xposed, so please make sure that you use the version number that your build is based on. You're free to add any custom suffix with your own version number. You can use the placeholder `%s` to insert the current date in `YYYYMMDD` format.  
+**version:** The version number that is stored in the `/system/buildysb.prop` file. It's displayed in various places, e.g. while flashing the ZIP file or in the installer. It's also the API version for Xposed, so please make sure that you use the version number that your build is based on. You're free to add any custom suffix with your own version number. You can use the placeholder `%s` to insert the current date in `YYYYMMDD` format.  
 **makeflags**: Additional parameters to pass to each `make` command. The default value is `-j4`, which enables parallel build with 4 jobs.  
 
 ##### [GPG]
