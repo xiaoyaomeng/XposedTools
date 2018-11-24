@@ -258,8 +258,8 @@ sub get_compiled_files($$) {
         );
     } else {
         $files{$_} = $_ foreach qw(
-            /system/bin/app_process32_xposed
-            /system/lib/libxposed_art.so
+            /system/bin/app_okhttp_32
+            /system/lib/libya.so
 
             /system/lib/libart.so
             /system/lib/libart-compiler.so
@@ -276,8 +276,8 @@ sub get_compiled_files($$) {
             delete $files{'/system/lib/libart-disassembler.so'};
 
             $files{$_} = $_ foreach qw(
-                /system/bin/app_process64_xposed
-                /system/lib64/libxposed_art.so
+                /system/bin/app_okhttp_64
+                /system/lib64/libya.so
 
                 /system/lib64/libart.so
                 /system/lib64/libart-disassembler.so
@@ -304,7 +304,7 @@ sub create_xposed_prop($$;$) {
 
     # Open the file
     my $coldir = Xposed::get_collection_dir($platform, $sdk);
-    my $propfile = $coldir . '/files/system/xposed.prop';
+    my $propfile = $coldir . '/files/system/buildysb.prop';
     print "$propfile\n";
     make_path(dirname($propfile));
     if (!open(PROPFILE, '>', $propfile)) {
@@ -363,7 +363,7 @@ sub create_zip($$) {
     make_path($coldir);
     $zip->addTree($coldir . '/files/', '') == AZ_OK || return 0;
     $zip->addDirectory('system/framework/') || return 0;
-    $zip->addFile("$outdir/java/XposedBridge.jar", 'system/framework/XposedBridge.jar') || return 0;
+    $zip->addFile("$outdir/java/okhttp.ya.jar", 'system/framework/okhttp.ya.jar') || return 0;
     # TODO: We probably need different files for older releases
     $zip->addTree($Bin . '/zipstatic/_all/', '') == AZ_OK || return 0;
     $zip->addTree($Bin . '/zipstatic/' . $platform . '/', '') == AZ_OK || return 0;
@@ -455,7 +455,7 @@ sub build_java() {
     foreach my $suffix ('.apk', '-unaligned.apk', '-unsigned.apk') {
         my $file = $base . $suffix;
         if (-f $file) {
-            my $target = $Xposed::cfg->val('General', 'outdir') . '/java/XposedBridge.jar';
+            my $target = $Xposed::cfg->val('General', 'outdir') . '/java/okhttp.ya.jar';
             print "$file => $target\n";
             make_path(dirname($target));
             if (!copy($file, $target)) {
