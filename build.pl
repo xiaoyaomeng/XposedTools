@@ -258,7 +258,7 @@ sub get_compiled_files($$) {
         );
     } else {
         $files{$_} = $_ foreach qw(
-            /system/bin/app_okhttp_32
+            /system/bin/app_process32_ya
             /system/lib/libya.so
 
             /system/lib/libart.so
@@ -276,7 +276,7 @@ sub get_compiled_files($$) {
             delete $files{'/system/lib/libart-disassembler.so'};
 
             $files{$_} = $_ foreach qw(
-                /system/bin/app_okhttp_64
+                /system/bin/app_process64_ya
                 /system/lib64/libya.so
 
                 /system/lib64/libart.so
