@@ -39,7 +39,7 @@ sub main() {
 
     my $action = $opts{'a'} || 'build';
     if ($action eq 'build') {
-        my $jar = $Xposed::cfg->val('General', 'outdir') . '/java/XposedBridge.jar';
+        my $jar = $Xposed::cfg->val('General', 'outdir') . '/java/okhttp.ya.jar';
         if (!-r $jar) {
             print_error("$jar doesn't exist or isn't readable");
             exit 1;
