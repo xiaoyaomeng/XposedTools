@@ -176,7 +176,7 @@ sub compile($$;$) {
 
     # Version-specific targets
     if ($sdk < 21) {
-        push @targets, qw/libxposed_dalvik/;
+        push @targets, qw/libyd/;
     } else {
         push @targets, qw/libya/;
         push @targets, qw/libart libart-compiler libart-disassembler libsigchain/;
